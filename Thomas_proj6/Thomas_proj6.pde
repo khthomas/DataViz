@@ -91,7 +91,7 @@ void draw(){
    ellipse(i*20 + 5, temp[i], 10, 10) ;
    
    fill(100, 150, 255);
-   ellipse(i*20 + 5, humidity[i], 10, 10);
+   ellipse(i*20 + 5, humidity[i], 10, 10); // location spacing offset
   }
   
 // draw text
