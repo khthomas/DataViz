@@ -69,8 +69,13 @@ void setup(){
  pressure = getFloatValues(list, "pressure");
  
  // string values
- dttm =  new String[list.size()];
- dttm = getDesc(list, "dt_txt");
+ //dttm =  new String[list.size()];
+ //dttm = getDesc(list, "dt_txt");
+ String[] test = new String[list.size()];
+ test = getDesc(list, "test");
+ println(test);
+ 
+ 
 
 //fonts
 f = createFont("Arial", 12, true);

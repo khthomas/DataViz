@@ -15,13 +15,31 @@ int cnt;
 String cod;
 float message;
 JSONArray list;
-float[] temp;
-
 int count=0;
 
+// scale values
+float myScale;
+
+// float[] values
+float[] temp;
+float[] humidity;
+float[] pressure;
+
+// string[] values
+String[] dttm;
+String[] desc;
+
+//
+PImage clouds;
+PImage rain;
+PImage thisImage;
+
+
 void setup(){
- size(800,800);
-   background (255);
+  clouds = loadImage("Clouds.jpg");
+  rain = loadImage("Rain.jpg");
+   size(800,800);
+   //background(255);
  // call the urlConnection
  try{
    
@@ -46,12 +64,26 @@ void setup(){
 temp = new float[list.size()];
 String[] rain = new String[list.size()];
 temp = getFloatValues(list, "temp");
-//println(temp);
+
+// get date time values
+// string values
+ dttm =  new String[list.size()];
+ dttm = getDesc(list, "dt_txt");
+ 
+ desc = new String[list.size()];
+ desc = getWeatherDescription(list);
+
+// other vars
+myScale = width/ temp.length;
+
+//println(desc);
 }
 
 void draw(){
-  background(255);
-  
+  image(rain, 0,0);
+  fill(255, 150);
+  rect(-1,-1, width, height);
+    
    textSize(32);
    textAlign(CENTER);
    fill(0);
@@ -61,6 +93,13 @@ void draw(){
    textAlign(CENTER);
    fill(0);
    text("The temperature is "+temp[count]+"°F.", width/2, height/2);
+   
+   textSize(12);
+   textAlign(CENTER);
+   fill(0);
+   text("Weather Description: "+desc[count], width/2, height/2 + 15);
+   
+   drawLine(temp, 10, 100, myScale);
 
 }
 

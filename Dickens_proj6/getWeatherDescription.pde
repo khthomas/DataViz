@@ -1,5 +1,5 @@
 
-public String[] getDesc(JSONArray jo, String level) {
+public String[] getWeatherDescription(JSONArray jo) {
   
   String[] output = new String[jo.size()]; 
   //JSONArray val2;
