@@ -2,6 +2,8 @@ import java.net.*;
 import java.io.*;
 import java.util.ArrayList;
 
+
+//API Access variables
 String apiKey = "5f4f1d0eb464d45251ada7cb4c2ee6d2";
 String urlBase = "http://api.openweathermap.org/data/2.5/forecast?id=";
 String siteID = "4464368";
@@ -9,6 +11,7 @@ String urlEnd = "&APPID=";
 String units = "&units=imperial";
 String completeURL = urlBase + siteID + urlEnd + apiKey + units;
 
+//JSON Variables
 JSONObject payload = new JSONObject();
 JSONObject city;
 int cnt;
@@ -29,15 +32,15 @@ float[] pressure;
 String[] dttm;
 String[] desc;
 
-//
+//Background Images
 PImage clouds;
-PImage rain;
-PImage thisImage;
-
+PImage rainy;
+PImage sun;
 
 void setup(){
   clouds = loadImage("Clouds.jpg");
-  rain = loadImage("Rain.jpg");
+  rainy = loadImage("Rain.jpg");
+  sun = loadImage("sun.png");
    size(800,800);
    //background(255);
  // call the urlConnection
@@ -76,14 +79,27 @@ temp = getFloatValues(list, "temp");
 // other vars
 myScale = width/ temp.length;
 
-//println(desc);
+
 }
 
 void draw(){
-  image(rain, 0,0);
-  fill(255, 150);
+    fill(255, 150);
   rect(-1,-1, width, height);
-    
+ 
+   //Load graphics based on Description
+   if(desc[count].equals("Clouds") ==true){
+     image(clouds, 0, 0);
+   }
+   
+   if(desc[count].equals("Rain")==true){
+     image(rainy, 0, 0);
+   }
+       
+   if(desc[count].equals("Clear")==true){
+     image(sun, height/8, height/20);
+   }
+   
+   //Print Labels onscreen
    textSize(32);
    textAlign(CENTER);
    fill(0);
@@ -99,10 +115,17 @@ void draw(){
    fill(0);
    text("Weather Description: "+desc[count], width/2, height/2 + 15);
    
+    // Draw temperature graph
    drawLine(temp, 10, 100, myScale);
 
 }
 
+//Function to cycle through array based on mouse clicks
 void mousePressed(){
-  count+=1;
+  if(count<temp.length-1){ //Check if count is within bounds of the array length
+    count+=1;
+  }
+  else{  //Restart Loop before going out of bounds
+    count=0;
+  }
 }
