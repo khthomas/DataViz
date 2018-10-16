@@ -40,7 +40,7 @@ PImage sun;
 void setup(){
   clouds = loadImage("Clouds.jpg");
   rainy = loadImage("Rain.jpg");
-  sun = loadImage("sun.png");
+  sun = loadImage("sun.jpg");
    size(800,800);
    //background(255);
  // call the urlConnection
@@ -83,8 +83,7 @@ myScale = width/ temp.length;
 }
 
 void draw(){
-    fill(255, 150);
-  rect(-1,-1, width, height);
+ 
  
    //Load graphics based on Description
    if(desc[count].equals("Clouds") ==true){
@@ -98,6 +97,9 @@ void draw(){
    if(desc[count].equals("Clear")==true){
      image(sun, height/8, height/20);
    }
+   
+    fill(255, 150);
+    rect(-1,-1, width, height);
    
    //Print Labels onscreen
    textSize(32);
