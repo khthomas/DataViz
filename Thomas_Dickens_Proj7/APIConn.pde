@@ -1,7 +1,7 @@
 class APIConn{
 //API Access variables
 String url;
-JSONObject payload;
+JSONObject payload; 
 
  
  // constructors
@@ -21,10 +21,6 @@ JSONObject payload;
   this.payload = output;
   
  }
- 
-
- //get the data
-
 
 
  
