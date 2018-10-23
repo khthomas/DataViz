@@ -13,9 +13,10 @@ class WeatherReport{
   int tSize;
   int tFill;
   int count;
+  String[] dttm;
 
   //Constructors
-  public WeatherReport(String[] desc, float[] temp, float[] hum, float[] press, int count){
+  public WeatherReport(String[] desc, float[] temp, float[] hum, float[] press, String[] dttm, int count){
     this.desc = desc;
     this.count = count;
     this.cloudy = loadImage("Clouds.jpg");;
@@ -26,14 +27,15 @@ class WeatherReport{
     this.tSize = tSize;
     this.tFill = tFill;
     this.count = count;
+    this.dttm = new String[dttm.length];
+    this.dttm = dttm;
     
     city = "Richmond";
     state = "VA";
     tSize = 48;
     tFill = 0;
     
-    fill(255, 150);
-    rect(-1,-1, width, height);
+
     
     if(desc[count].equals("Clouds") ==true){
     tint(255, 128);
@@ -49,6 +51,10 @@ class WeatherReport{
     tint(255, 128);
     image(sunny, height/8, height/20);
     }
+    
+    // fade the image to make text easier to read
+    fill(255, 150);
+    rect(-1,-1, width, height);
   
     //Print Labels onscreen
     textSize(tSize);
@@ -75,5 +81,12 @@ class WeatherReport{
     textAlign(CENTER);
     fill(tFill);
     text("The Pressure is: "+press[count], width/2, height/2 + tSize*1.5);
+    
+    textSize(tSize/2);
+    textAlign(CENTER);
+    fill(tFill);
+    text("Selected Datetime: "+dttm[count], width/2, height/2 + tSize*2);
+    
+
   }
 }

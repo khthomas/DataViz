@@ -6,6 +6,7 @@ APIConn weather;
 WeatherVals weatherVals;
 GraphVals tempGraph;
 WeatherReport WeatherReport;
+CurrentConditions current;
 // Start weather API Class
 
 
@@ -23,13 +24,24 @@ weather = new APIConn(apiURL);
  weatherVals = new WeatherVals(weather);
 
  println(weatherVals.temp.length);
+ 
+
 }
 
 void draw(){
-  WeatherReport = new WeatherReport(weatherVals.conditionDesc, weatherVals.temp, weatherVals.hum, weatherVals.press, count);
+ 
+  //  public WeatherReport(String[] desc, float[] temp, float[] hum, float[] press, String[] dttm, int count){
+  WeatherReport = new WeatherReport(weatherVals.conditionDesc, weatherVals.temp, weatherVals.hum, weatherVals.press, weatherVals.dttm, count);
   
   //  public GraphVals(float[] inputData, String [] dttm, float xStart, float yStart, float scaleVal){
   tempGraph = new GraphVals(weatherVals.temp, weatherVals.dttm, 10, 100, width / weatherVals.temp.length);
+  
+   //public CurrentConditions(float[] plotVars, String[] dttm, float xStart, float yStart, float scaleVal, int count)
+ current = new CurrentConditions(weatherVals.temp, weatherVals.dttm, 10, 100, width / weatherVals.temp.length, count);
+ 
+ 
+ 
+ shape(current.drawCurrent());
 }
 
 void mousePressed(){
