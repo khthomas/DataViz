@@ -65,8 +65,7 @@ class DataImport{
       precip[i] = prec;
       avgPrecip[i] = aPrec;
       recPrecip[i] = rPrec;
-      
-      i++;
+
     }
   }
 }
