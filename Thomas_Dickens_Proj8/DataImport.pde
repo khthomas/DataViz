@@ -48,9 +48,9 @@ class DataImport{
       int rMaxT = row.getInt("record_max_temp");
       int rMinTYr = row.getInt("record_min_temp_year");
       int rMaxTYr = row.getInt("record_max_temp_year");
-      float prec = row.getInt("actual_precipitation");
-      float aPrec = row.getInt("average_precipitation");
-      float rPrec = row.getInt("record_precipitation");
+      float prec = row.getFloat("actual_precipitation");
+      float aPrec = row.getFloat("average_precipitation");
+      float rPrec = row.getFloat("record_precipitation");
       
       dttm[i] = dtime;
       meanTemp[i] = meanT;

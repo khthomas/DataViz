@@ -57,15 +57,16 @@ class BarChartAvgTemps{
    line(xStart, height - yStart, scaleVal * this.avgVals.length, height - yStart);
    
    // y axis
-   line(xStart, height - (yStart), xStart, height - (yStart+this.maxVal*2));
+   line(xStart, height - (yStart), xStart, height - (yStart+this.maxVal));
    
    //tick marks
    for (float tick = 0; tick <=10; tick ++){
      float thisTick = 0 + tick * (this.maxVal / 10);
      line(xStart - 5, height - yStart - thisTick, xStart+5, height - yStart - thisTick);
-     textSize(10);
-     textAlign(LEFT);
-     text(String.valueOf(thisTick), xStart - 10, height - yStart - thisTick);
+     //textSize(10);
+     //fill(0);
+     //textAlign(LEFT);
+     //text(String.valueOf(df.format(thisTick)), xStart - 10, height - yStart - thisTick);
      
      
    }
@@ -73,13 +74,23 @@ class BarChartAvgTemps{
    // start drawing the bars
    for (int i = 0; i < avgVals.length; i++) {
     fill(50, 255, 77);
-    rect(xStart, height - yStart - this.avgVals[i], scaleVal - 20 , this.avgVals[i]);
-    
-    // text above bar chart
+    rect(xStart + 10, height - yStart - this.avgVals[i], scaleVal - 20 , this.avgVals[i]);
+    textSize(11);
+    fill(0);
+    textAlign(LEFT);
+    text(String.valueOf(df.format(this.avgVals[i])), xStart + 20, height - yStart - this.avgVals[i] - 4);
+    text(String.valueOf(i + 1), xStart + 25, height - yStart + 15);
+
     
     
     xStart += scaleVal;
    }
+   
+   // Title of graph
+   textSize(25);
+   fill(0);
+   textAlign(CENTER);
+   text("Average Monthly Temperature", width/2, height - yStart - maxVal - 20);
 
  }
  
