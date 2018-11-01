@@ -38,11 +38,13 @@ class PieChartView{
          
        }
     }
+ 
     
+     
     this.sumOfValues = sumArray(tempVals);
     
     // Now to find the sum of the input value for each month
-    for (int month = 0; month < 12; month++) {
+    for (int month = 0; month < 6; month++) {
       String targetMonth = "-" + String.valueOf(month + 1) + "-";
       ArrayList<Float> monthTemp = new ArrayList<Float>();
       months[month] = month + 1;
@@ -55,17 +57,25 @@ class PieChartView{
       }
       pieValues[month] = sumArray(monthTemp) / this.sumOfValues;
     }
-    
+
+
   } // end overloaded constructor
-  
+
   
   //**********************************************************
   // PRIMARY METHODS
   //**********************************************************
   
-  public void drawPie(){
-    
-    
+  // code borrowed from https://processing.org/examples/piechart.html
+  public void drawPie(float xLoc, float yLoc, float diameter){
+
+    float lastAngle = 0;
+    for (int i =0; i < this.pieValues.length; i++){
+        float gray = map(i, 0, this.pieValues.length, 0, 255);
+        fill(gray);
+        arc(xLoc, yLoc, diameter, diameter, lastAngle, lastAngle+radians(this.pieValues[i]*360));
+        lastAngle+= radians(this.pieValues[i]*360);
+    }
   }
   
   

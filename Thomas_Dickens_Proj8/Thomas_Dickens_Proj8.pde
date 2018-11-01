@@ -1,4 +1,5 @@
 import java.text.DecimalFormat;
+import java.util.stream.*;
 DecimalFormat df = new DecimalFormat("###.##");
 String csvName = "KCLT.csv";
 DataImport dataImport;
@@ -28,6 +29,6 @@ avgTemps.drawGraph(10, 125, width / avgTemps.avgVals.length);
 
 // PieChart
 pieChart = new PieChartView(dataImport.avgPrecip, dataImport.dttm, 2015);
-println(pieChart.pieValues);
+pieChart.drawPie(100,100,200);
  
 }
