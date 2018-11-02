@@ -11,6 +11,7 @@ class PieChartView{
   float[] inputVals;
   String[] dttm;
   int year;
+  int numMonths;
   
 
   // ****************************************************
@@ -27,8 +28,9 @@ class PieChartView{
     this.inputVals = floatVals;
     this.year = year;
     ArrayList<Float> tempVals = new ArrayList<Float>();
-    int numMonths = countMonthsInYear(this.dttm, this.year);
-    this.months = new int[numMonths];
+    this.numMonths = countMonthsInYear(this.dttm, this.year);
+    //this.months = new int[numMonths];
+    this.months = findMonthsInYear(this.dttm, this.year, this.numMonths).clone();
     this.pieValues = new float[numMonths];
     
 
@@ -52,7 +54,7 @@ class PieChartView{
     for (int month = 0; month < numMonths; month++) {
       String targetMonth = "-" + String.valueOf(month + 1) + "-";
       ArrayList<Float> monthTemp = new ArrayList<Float>();
-      months[month] = month + 1;
+      //months[month] = month + 1;
       
       // cycle through the date time values
       for (int i = 0; i < this.dttm.length; i ++){
@@ -62,8 +64,8 @@ class PieChartView{
       }
       this.pieValues[month] = sumArray(monthTemp) / this.sumOfValues;
     }
+    println(this.months);
 
-  println(this.pieValues);
   } // end overloaded constructor
 
   
@@ -76,8 +78,9 @@ class PieChartView{
 
     float lastAngle = 0;
     for (int i =0; i < this.pieValues.length; i++){
-        float gray = map(i, 0, this.pieValues.length, 0, 255);
-        fill(gray);
+        //float gray = map(i, 0, this.pieValues.length, 0, 255);
+        color rand = color(random(255), random(255), random(255));
+        fill(rand);
         arc(xLoc, yLoc, diameter, diameter, lastAngle, lastAngle+radians(this.pieValues[i]*360));
         lastAngle+= radians(this.pieValues[i]*360);
     }
@@ -108,7 +111,7 @@ public int countMonthsInYear(String[] dttm, int year){
   int uniqueMonths = 0;
   
   for (int i = 0; i < 12; i++){
-   String searchString = String.valueOf(year)+"-" + String.valueOf(i+1);
+   String searchString = String.valueOf(year)+"-" + String.valueOf(i+1) + "-";
    
    for (int index = 0; index < dttm.length; index++){
     if (dttm[index].contains(searchString)){
@@ -121,6 +124,28 @@ public int countMonthsInYear(String[] dttm, int year){
  
  return uniqueMonths;
 }
+
+// get the actual month values
+public int[] findMonthsInYear(String[] dttm, int year, int numMonths){
+  int[] foundMonths = new int[numMonths];
+  int counter = 0;
+  
+  for (int i = 0; i < 12; i++){
+     String searchString = String.valueOf(year) + "-" + String.valueOf(i+1) + "-"; 
+     
+       for (int index = 0; index < dttm.length; index++){
+          if (dttm[index].contains(searchString)){
+            foundMonths[counter] = i+1;
+            counter++;
+            break;
+          }
+          
+    }    
+  }
+  return foundMonths;
+
+} 
+  
 
 
 }
