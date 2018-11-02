@@ -9,6 +9,7 @@ BarGraphView weatherBar;
 BarChartAvgTemps avgTemps;
 PieChartView pieChart2014;
 PieChartView pieChart2015;
+PieChartView testInts;
 
 void setup(){
   background(255);
@@ -35,6 +36,9 @@ pieChart2014.drawPie(100,100,200);
 
 pieChart2015 = new PieChartView(dataImport.avgPrecip, dataImport.dttm, 2014);
 pieChart2015.drawPie(400, 100, 200);
-////println(pieChart.months);
+
+// test of an integer array, the output can't really be interpreted, but the graph works, the idea is that the class is genearlized. 
+//testInts = new PieChartView(dataImport.avgMinTemp, dataImport.dttm, 2015);
+//testInts.drawPie(400,100,200);
  
 }

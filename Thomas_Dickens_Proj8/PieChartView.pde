@@ -9,6 +9,7 @@ class PieChartView{
   int[] months;
   float[] pieValues;
   float[] inputVals;
+  int[] intVals;
   String[] dttm;
   int year;
   int numMonths;
@@ -68,6 +69,55 @@ class PieChartView{
     println(this.months);
 
   } // end overloaded constructor
+  
+  //*****************************************************
+  //this constructor will take an interger array as input
+  //*****************************************************
+    public PieChartView(int[] intVals, String[] datetime, int year){
+    this.dttm = datetime;
+    this.intVals = intVals;
+    this.year = year;
+    ArrayList<Float> tempVals = new ArrayList<Float>();
+    this.numMonths = countMonthsInYear(this.dttm, this.year);
+    this.months = findMonthsInYear(this.dttm, this.year, this.numMonths).clone();
+    this.pieValues = new float[numMonths];
+    
+
+
+    
+    // first find the maximum for each year
+    for (int i = 0; i < this.intVals.length; i++){
+        String targetString = String.valueOf(this.year);
+      
+       if(this.dttm[i].contains(targetString)){
+         tempVals.add(Float.valueOf(this.intVals[i]));
+         
+       }
+    }
+ 
+    
+     
+    this.sumOfValues = sumArray(tempVals);
+    
+    // Now to find the sum of the input value for each month
+    for (int month = 0; month < numMonths; month++) {
+      String targetMonth = "-" + String.valueOf(this.months[month]) + "-";
+      ArrayList<Float> monthTemp = new ArrayList<Float>();
+      //months[month] = month + 1;
+      
+      // cycle through the date time values
+      for (int i = 0; i < this.dttm.length; i ++){
+          if (this.dttm[i].contains(targetMonth)){
+                monthTemp.add(Float.valueOf(this.intVals[i]));
+          }
+      }
+      this.pieValues[month] = sumArray(monthTemp) / this.sumOfValues;
+    }
+    //println(this.pieValues);
+    //println();
+    //println(this.months);
+
+  } // end overloaded constructor with interger array input
 
   
   //**********************************************************
