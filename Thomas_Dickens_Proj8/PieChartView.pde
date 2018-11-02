@@ -29,7 +29,6 @@ class PieChartView{
     this.year = year;
     ArrayList<Float> tempVals = new ArrayList<Float>();
     this.numMonths = countMonthsInYear(this.dttm, this.year);
-    //this.months = new int[numMonths];
     this.months = findMonthsInYear(this.dttm, this.year, this.numMonths).clone();
     this.pieValues = new float[numMonths];
     
@@ -52,7 +51,7 @@ class PieChartView{
     
     // Now to find the sum of the input value for each month
     for (int month = 0; month < numMonths; month++) {
-      String targetMonth = "-" + String.valueOf(month + 1) + "-";
+      String targetMonth = "-" + String.valueOf(this.months[month]) + "-";
       ArrayList<Float> monthTemp = new ArrayList<Float>();
       //months[month] = month + 1;
       
@@ -64,6 +63,8 @@ class PieChartView{
       }
       this.pieValues[month] = sumArray(monthTemp) / this.sumOfValues;
     }
+    println(this.pieValues);
+    println();
     println(this.months);
 
   } // end overloaded constructor

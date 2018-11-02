@@ -7,8 +7,8 @@ HistogramView weatherHist;
 LineGraphView weatherLine;
 BarGraphView weatherBar;
 BarChartAvgTemps avgTemps;
-PieChartView pieChart;
-PieChartView pieChart2;
+PieChartView pieChart2014;
+PieChartView pieChart2015;
 
 void setup(){
   background(255);
@@ -29,10 +29,12 @@ avgTemps = new BarChartAvgTemps(dataImport);
 avgTemps.drawGraph(10, 125, width / avgTemps.avgVals.length);
 
 // PieChart
-pieChart = new PieChartView(dataImport.avgPrecip, dataImport.dttm, 2014);
-pieChart.drawPie(100,100,200);
+pieChart2014 = new PieChartView(dataImport.avgPrecip, dataImport.dttm, 2015);
+pieChart2014.drawPie(100,100,200);
 
-//pieChart2 = new PieChartView(dataImport.avgPrecip, dataImport.dttm, 2015);
-//pieChart.drawPie(400, 100, 200);
+
+pieChart2015 = new PieChartView(dataImport.avgPrecip, dataImport.dttm, 2014);
+pieChart2015.drawPie(400, 100, 200);
+////println(pieChart.months);
  
 }
