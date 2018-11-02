@@ -6,11 +6,12 @@ class PieChartView{
   
   // fields
   float sumOfValues;
-  int[] months =  new int[12];
-  float[] pieValues = new float[12];
+  int[] months;
+  float[] pieValues;
   float[] inputVals;
   String[] dttm;
   int year;
+  
 
   // ****************************************************
   // CONSTRUCTORS
@@ -26,6 +27,10 @@ class PieChartView{
     this.inputVals = floatVals;
     this.year = year;
     ArrayList<Float> tempVals = new ArrayList<Float>();
+    int numMonths = countMonthsInYear(this.dttm, this.year);
+    this.months = new int[numMonths];
+    this.pieValues = new float[numMonths];
+    
 
 
     
@@ -44,7 +49,7 @@ class PieChartView{
     this.sumOfValues = sumArray(tempVals);
     
     // Now to find the sum of the input value for each month
-    for (int month = 0; month < 6; month++) {
+    for (int month = 0; month < numMonths; month++) {
       String targetMonth = "-" + String.valueOf(month + 1) + "-";
       ArrayList<Float> monthTemp = new ArrayList<Float>();
       months[month] = month + 1;
@@ -55,10 +60,10 @@ class PieChartView{
                 monthTemp.add(this.inputVals[i]);
           }
       }
-      pieValues[month] = sumArray(monthTemp) / this.sumOfValues;
+      this.pieValues[month] = sumArray(monthTemp) / this.sumOfValues;
     }
 
-
+  println(this.pieValues);
   } // end overloaded constructor
 
   
@@ -95,6 +100,27 @@ public float sumArray(ArrayList<Float> input){
   
   return sum;
 }
+
+
+// this method will count the unique months in the datetime string array. This assume that the date time
+// values are of format yyyy-m-d
+public int countMonthsInYear(String[] dttm, int year){
+  int uniqueMonths = 0;
   
+  for (int i = 0; i < 12; i++){
+   String searchString = String.valueOf(year)+"-" + String.valueOf(i+1);
+   
+   for (int index = 0; index < dttm.length; index++){
+    if (dttm[index].contains(searchString)){
+      uniqueMonths+=1;
+      break;
+    }
+   }
   
+ }
+ 
+ return uniqueMonths;
+}
+
+
 }
