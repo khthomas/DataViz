@@ -218,7 +218,7 @@ public int[] findMonthsInYear(String[] dttm, int year, int numMonths){
 
 }
 
-// look up months
+// look up months: https://docs.oracle.com/javase/tutorial/java/nutsandbolts/switch.html
 public String whatMonth(int month){
   String monthString;
   switch(month) {
