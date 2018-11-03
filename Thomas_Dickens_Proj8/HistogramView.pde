@@ -66,9 +66,9 @@ int[] frequencyMean;
         fill(240, 10, 10);
         stroke(255);
         int mult = 1;
-        float rectWidth = (width / frequencyMean.length)*(mult*2);
-        float ypos = height - (frequencyMean[i] * mult);
-        rect((rectWidth*i), ypos, rectWidth, ypos*2);
+        float rectWidth = (width / frequencyMean.length)*(mult*2)/2;
+        float ypos = height - (frequencyMean[i] * mult)*8;
+        rect((rectWidth*i), ypos, rectWidth, ypos);
       }
     
     //Legend & Marginalia
