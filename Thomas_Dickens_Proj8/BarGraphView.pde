@@ -20,7 +20,7 @@ class BarGraphView{
       fill(240, 10, 10);
       stroke(255);
       int mult = 1;
-      float rectWidth = (width / maxTmp.length)*2;
+      float rectWidth = (width / minTmp.length)*(mult*2);
       float ypos = height - (maxTmp[i] * mult);
       rect((rectWidth*i), ypos, rectWidth, ypos);
     }
@@ -30,7 +30,7 @@ class BarGraphView{
       fill(10, 10, 240);
       stroke(255);
       int mult = 1;
-      float rectWidth = (width / minTmp.length)*2;
+      float rectWidth = (width / minTmp.length)*(mult*2);
       float ypos = height - (minTmp[i] * mult);
       rect((rectWidth*i), ypos, rectWidth, ypos);
     }

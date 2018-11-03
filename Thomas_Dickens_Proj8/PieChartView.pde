@@ -64,9 +64,9 @@ class PieChartView{
       }
       this.pieValues[month] = sumArray(monthTemp) / this.sumOfValues;
     }
-    println(this.pieValues);
-    println();
-    println(this.months);
+    //println(this.pieValues);
+    //println();
+    //println(this.months);
 
   } // end overloaded constructor
   

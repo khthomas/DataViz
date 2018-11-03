@@ -17,7 +17,7 @@ void setup(){
 
   dataImport = new DataImport(csvName);
 
-//  weatherHist = new HistogramView(dataImport);
+  weatherHist = new HistogramView(dataImport);
 
 
 // LineGraphView(DataImport input, float xStart, float yStart, float scaleVal)
