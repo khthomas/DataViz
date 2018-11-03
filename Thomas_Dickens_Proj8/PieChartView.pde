@@ -125,17 +125,38 @@ class PieChartView{
   //**********************************************************
   
   // code borrowed from https://processing.org/examples/piechart.html
-  public void drawPie(float xLoc, float yLoc, float diameter){
+  public void drawPie(float xLoc, float yLoc, float diameter, String title){
 
     float lastAngle = 0;
+    float keyOffSet = 0;
+    float keySize = diameter / 12 - 5;
     for (int i =0; i < this.pieValues.length; i++){
         //float gray = map(i, 0, this.pieValues.length, 0, 255);
         color rand = color(random(255), random(255), random(255));
         fill(rand);
         arc(xLoc, yLoc, diameter, diameter, lastAngle, lastAngle+radians(this.pieValues[i]*360));
         lastAngle+= radians(this.pieValues[i]*360);
+        
+        // key information
+        rect(xLoc + diameter / 2 + 10, yLoc - diameter /2 + keyOffSet, keySize,keySize);
+        
+        keyOffSet += keySize + 5;
+        textSize(keySize);
+        fill(0);
+        textAlign(LEFT);
+        text(whatMonth(this.months[i]), xLoc + diameter / 2 + keySize*2, yLoc - diameter /2 + keyOffSet - 5);
     }
+    
+   // key information
+   
+    
+   textSize(20);
+   fill(0);
+   textAlign(CENTER);
+   text(title, xLoc, yLoc - diameter / 2 - 10);
   }
+  
+  
   
   
   
@@ -195,7 +216,44 @@ public int[] findMonthsInYear(String[] dttm, int year, int numMonths){
   }
   return foundMonths;
 
-} 
+}
+
+// look up months
+public String whatMonth(int month){
+  String monthString;
+  switch(month) {
+            case 1:  monthString = "January";
+                     break;
+            case 2:  monthString = "February";
+                     break;
+            case 3:  monthString = "March";
+                     break;
+            case 4:  monthString = "April";
+                     break;
+            case 5:  monthString = "May";
+                     break;
+            case 6:  monthString = "June";
+                     break;
+            case 7:  monthString = "July";
+                     break;
+            case 8:  monthString = "August";
+                     break;
+            case 9:  monthString = "September";
+                     break;
+            case 10: monthString = "October";
+                     break;
+            case 11: monthString = "November";
+                     break;
+            case 12: monthString = "December";
+                     break;
+            default: monthString = "Invalid month";
+                     break;
+    
+  }
+  
+  return monthString;
+  
+}
   
 
 
