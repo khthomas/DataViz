@@ -10,6 +10,8 @@ class BarChartAvgTemps{
  int[] months = new int[12]; //holds integers from 1 to 12
  float[] avgVals = new float[12]; // holds average monthly values
  float maxVal;
+ Controller controller;
+ int selectedMonth;
  
  
  //constructors
@@ -20,7 +22,8 @@ class BarChartAvgTemps{
  
  
  //overloaded
- public BarChartAvgTemps(DataImport dataObject){
+ public BarChartAvgTemps(Controller controller, DataImport dataObject){
+   this.controller = controller;
    this.dttm = dataObject.dttm;
    this.monthAvgValue = dataObject.avgMaxTemp;
    
@@ -73,7 +76,13 @@ class BarChartAvgTemps{
    
    // start drawing the bars
    for (int i = 0; i < avgVals.length; i++) {
+    
+     if ( i == this.selectedMonth - 1) {
+       fill(77, 50, 255);
+     } else {
     fill(50, 255, 77);
+     }
+     
     rect(xStart + 10, height - yStart - this.avgVals[i], scaleVal - 20 , this.avgVals[i]);
     textSize(11);
     fill(0);
@@ -113,7 +122,17 @@ class BarChartAvgTemps{
    return sum;
  }
  
+
+// method that interacts with the controller
+public void setSelectedMonth(int month){
+  this.selectedMonth = month;
+  
+  
 }
+ 
+} // end class
+
+
 
 // look up months: https://docs.oracle.com/javase/tutorial/java/nutsandbolts/switch.html
 public String whatMonth(int month){
@@ -151,6 +170,10 @@ public String whatMonth(int month){
   return monthString;
   
 }
+
+
+
+
  
  
   

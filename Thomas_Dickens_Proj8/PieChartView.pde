@@ -13,6 +13,10 @@ class PieChartView{
   String[] dttm;
   int year;
   int numMonths;
+  Controller controller;
+  PVector loc;
+  float dim;
+  color[] pieColors;
   
 
   // ****************************************************
@@ -24,7 +28,7 @@ class PieChartView{
   }
     
   // overloaded
-  public PieChartView(float[] floatVals, String[] datetime, int year){
+  public PieChartView(Controller controller, float[] floatVals, String[] datetime, int year, PVector loc){
     this.dttm = datetime;
     this.inputVals = floatVals;
     this.year = year;
@@ -32,6 +36,9 @@ class PieChartView{
     this.numMonths = countMonthsInYear(this.dttm, this.year);
     this.months = findMonthsInYear(this.dttm, this.year, this.numMonths).clone();
     this.pieValues = new float[numMonths];
+    this.controller = controller;
+    this.loc = loc;
+    this.pieColors = new color[numMonths];
     
 
 
@@ -63,17 +70,15 @@ class PieChartView{
           }
       }
       this.pieValues[month] = sumArray(monthTemp) / this.sumOfValues;
+      this.pieColors[month] = color(random(255), random(255), random(255));
     }
-    //println(this.pieValues);
-    //println();
-    //println(this.months);
 
   } // end overloaded constructor
   
   //*****************************************************
   //this constructor will take an interger array as input
   //*****************************************************
-    public PieChartView(int[] intVals, String[] datetime, int year){
+    public PieChartView(Controller controller, int[] intVals, String[] datetime, int year, PVector loc){
     this.dttm = datetime;
     this.intVals = intVals;
     this.year = year;
@@ -81,6 +86,10 @@ class PieChartView{
     this.numMonths = countMonthsInYear(this.dttm, this.year);
     this.months = findMonthsInYear(this.dttm, this.year, this.numMonths).clone();
     this.pieValues = new float[numMonths];
+    this.controller = controller;
+    this.loc = loc;
+    this.pieColors = new color[numMonths];
+    
     
 
 
@@ -112,6 +121,8 @@ class PieChartView{
           }
       }
       this.pieValues[month] = sumArray(monthTemp) / this.sumOfValues;
+      this.pieColors[month] = color(random(255), random(255), random(255));
+
     }
     //println(this.pieValues);
     //println();
@@ -125,15 +136,18 @@ class PieChartView{
   //**********************************************************
   
   // code borrowed from https://processing.org/examples/piechart.html
-  public void drawPie(float xLoc, float yLoc, float diameter, String title){
+  public void drawPie(float diameter, String title){
 
     float lastAngle = 0;
     float keyOffSet = 0;
+    float xLoc = this.loc.x;
+    float yLoc = this.loc.y;
     float keySize = diameter / 12 - 5;
+    this.dim = diameter;
     for (int i =0; i < this.pieValues.length; i++){
         //float gray = map(i, 0, this.pieValues.length, 0, 255);
-        color rand = color(random(255), random(255), random(255));
-        fill(rand);
+        //color rand = color(random(255), random(255), random(255));
+        fill(this.pieColors[i]);
         arc(xLoc, yLoc, diameter, diameter, lastAngle, lastAngle+radians(this.pieValues[i]*360));
         lastAngle+= radians(this.pieValues[i]*360);
         
@@ -145,6 +159,9 @@ class PieChartView{
         fill(0);
         textAlign(LEFT);
         text(whatMonth(this.months[i]), xLoc + diameter / 2 + keySize*2, yLoc - diameter /2 + keyOffSet - 5);
+        
+        // testing
+        //rect(this.loc.x - diameter/2, this.loc.y - diameter/2, diameter, diameter);
     }
     
    // key information
@@ -254,7 +271,49 @@ public String whatMonth(int month){
   return monthString;
   
 }
+
+
+// return boolean
+public boolean isMouseInObject(PVector mouseLoc){
+  //rect(this.loc.x - this.dim/2, this.loc.y - this.dim/2, this.dim, this.dim);
+  if (mouseLoc.x >= this.loc.x - this.dim/2 && mouseLoc.x <= this.loc.x + this.dim/2){
+  return true;
+  }
   
+  println(mouseLoc.x);
+  println(this.loc.x);
+  println(this.loc.x - this.dim/2);
+  println(this.loc.x + this.dim/2);
+ 
+ return false;
+  
+  
+}
+  
+
+void mousePressed(){
+  color c = get(mouseX, mouseY);
+  int monthIndex = findIndex(this.pieColors, c);
+  int theMonth = this.months[monthIndex];
+  //println(theMonth);
+  //println(c);
+  
+  controller.setSelectedMonth(theMonth); // convert color of pie chart to month
+  
+}
+
+// function that finds the index of the color array
+public int findIndex(color[] colorArray, color thisColor){
+  
+  for (int i = 0; i < colorArray.length; i++){
+   if (colorArray[i] == thisColor){
+    return i; 
+   }
+  }
+  
+  return 0;
+}
+
 
 
 }

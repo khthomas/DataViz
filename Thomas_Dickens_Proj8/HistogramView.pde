@@ -78,7 +78,7 @@ int[] frequencyMean;
     //println(summerMeanTemp);
     //println(minValMeanTemp);
     //println(maxValMeanTemp);
-    println(frequencyMean);
+    //println(frequencyMean);
   }
   
 }
