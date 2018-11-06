@@ -25,13 +25,33 @@ class LineGraphView{
     this.xStart = xStart;
     this.yStart = yStart;
     this.scaleVal = scaleVal;
+    this.maxVal = maxVal;
     
-    // draw x-axis
     maxVal = max(maxT);
-    line(this.xStart, height - this.yStart, this.scaleVal * this.maxT.length, height - this.yStart);
     
-    // draw y-axis
-    line(this.xStart, height - (this.yStart), this.xStart, height - (this.yStart+this.maxVal*2));
+   
+   //x axis
+   stroke(0);
+   line(xStart-3, height - yStart, scaleVal * this.minT.length+20, height - yStart);
+   stroke(175);
+   for(int i = 10; i<=maxVal; i+=10){
+     line(xStart-3, (height-yStart)-i, scaleVal * this.minT.length+20, (height-yStart)-i);
+   }
+   
+   // y axis
+   stroke(0);
+   line(xStart-3, height - (yStart), xStart-3, height - (yStart+this.maxVal));
+   
+   //labels
+   textSize(9);
+   fill(0);
+   stroke(175);
+   textAlign(RIGHT);
+   text("100", this.xStart-5, (height-yStart)-95);
+   text("80", this.xStart-5, (height-yStart)-75);
+   text("60", this.xStart-5, (height-yStart)-55);
+   text("40", this.xStart-5, (height-yStart)-35);
+   text("20", this.xStart-5, (height-yStart)-15);
 
     // Max Temperature
     for (int k = 0; k < this.maxT.length - 1; k++) {
@@ -54,7 +74,11 @@ class LineGraphView{
       this.xStart+=this.scaleVal;
     } // end for loop
 
-
+   // Title of graph
+   textSize(25);
+   fill(0);
+   textAlign(CENTER);
+   text("Min/Max Daily Temperatures (°F)", width/2, height - yStart - maxVal-10);
 
   }
   
