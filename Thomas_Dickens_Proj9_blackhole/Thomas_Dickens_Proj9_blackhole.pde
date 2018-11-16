@@ -6,8 +6,9 @@ void setup(){
  size(926,741, P3D);
  superMassive = new BlackHole(100, 25);
   //public Planetoid(float mass, float radius, float offset){
- inTheBeginning = new Planetoid(500, 50, 50);
+ inTheBeginning = new Planetoid(50, 50, 50);
  
+ //background
  eh = loadImage("eventHorizon2.jpg");
 }
 
@@ -17,6 +18,6 @@ void draw(){
  
  translate(width/2, height/2, 0);
  rotateZ(frameCount*0.02);
- inTheBeginning.creation();
- 
+   inTheBeginning.creation(); 
+
 }

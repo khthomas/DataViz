@@ -5,7 +5,7 @@ class BlackHole {
   float startingMass;
   float radius;
   float startX = width/2;
-  float startY = width/2;
+  float startY = height/2;
   
   
   // constructors
@@ -36,12 +36,13 @@ class BlackHole {
   void collapse(){
    //this method is basically a draw method, but I wanted it to be black hole themed
    fill(0);
-   ellipse(startX, startY, radius, radius);
+   ellipse(startX, startY, radius + startingMass, radius + startingMass);
+
   }
   
-  
-  
-  
+  void setMass(float incrament){
+   this.startingMass+=incrament;
+  }  
   
   
   

@@ -6,6 +6,7 @@ class Planetoid {
   float angle = 0;
   PShape globe;
   boolean dead = false;
+  float baseMass;
   
   // base constructor
   public Planetoid(){
@@ -14,6 +15,7 @@ class Planetoid {
   //overloaded
   public Planetoid(float mass, float radius, float offset){
    this.mass = mass;
+   this.baseMass = mass;
    this.radius = radius;
    this.offset = offset;
    
@@ -34,6 +36,10 @@ class Planetoid {
    shape(globe);
    this.fall();
   }
+  
+  else {
+    globe.scale(1,1,0.9);
+  }
   }
   
   void fall(){
@@ -42,12 +48,29 @@ class Planetoid {
     println(this.angle);
     
     if (this.angle > 150){
-     killPlanet();
+     shrinkPlanet();
+    }
+    
+    if (this.angle > 155) {
+      killPlanet();
+      increaseBlackHoleMass();
+    }
+  }
+  
+  void shrinkPlanet(){
+    for (int i = 0; i < 1000; i++){
+     float dec = this.radius / 1000;
+     this.radius -= dec; 
     }
   }
   
   void killPlanet(){
-    this.dead = true;
+    this.dead=true;
+  }
+  
+  void increaseBlackHoleMass(){
+    superMassive.setMass(this.baseMass);
+    
   }
   
   
