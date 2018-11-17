@@ -34,15 +34,13 @@ class Planetoid {
    translate(-width/4 + offset + this.angle, -height/4 + offset +this.angle, 0);
    globe = createShape(SPHERE, this.radius);
    shape(globe);
-   this.fall();
-  }
-  
-  else {
-    globe.scale(1,1,0.9);
-  }
+   //this.fall();
+    }
   }
   
   void fall(){
+    
+    if (!this.dead){
     this.angle+=mass/1000;
     this.mass++;
     println(this.angle);
@@ -54,6 +52,7 @@ class Planetoid {
     if (this.angle > 155) {
       killPlanet();
       increaseBlackHoleMass();
+      }
     }
   }
   

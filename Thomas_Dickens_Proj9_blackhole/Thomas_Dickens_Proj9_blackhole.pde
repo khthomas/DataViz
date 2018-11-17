@@ -1,15 +1,19 @@
 PImage eh;
+PImage earthTex; 
 BlackHole superMassive;
 Planetoid inTheBeginning;
+Earth earthTest;
 
 void setup(){
  size(926,741, P3D);
  superMassive = new BlackHole(100, 25);
   //public Planetoid(float mass, float radius, float offset){
- inTheBeginning = new Planetoid(50, 50, 50);
+ //inTheBeginning = new Planetoid(50, 50, 50);
+ earthTest = new Earth(60, 60, 60);
  
  //background
  eh = loadImage("eventHorizon2.jpg");
+ earthTex = loadImage("earthLike.png");
 }
 
 void draw(){
@@ -18,6 +22,8 @@ void draw(){
  
  translate(width/2, height/2, 0);
  rotateZ(frameCount*0.02);
-   inTheBeginning.creation(); 
+   //inTheBeginning.creation();
+   earthTest.creation();
+   earthTest.fall();
 
 }
