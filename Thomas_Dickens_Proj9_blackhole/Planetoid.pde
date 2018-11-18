@@ -68,7 +68,6 @@ class Planetoid {
     if (!this.dead){
     this.angle+=mass/1000;
     this.mass++;
-    println(this.angle);
     
     if (this.angle > 150){
      this.shrinkPlanet();
