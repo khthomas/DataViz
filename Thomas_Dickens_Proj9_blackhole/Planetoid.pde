@@ -28,15 +28,40 @@ class Planetoid {
   
   void creation(){
     if (!this.dead){
-   fill(127, 127, 127);
+   fill(127, 255, 127);
    noStroke();
    lights();
-   translate(-width/4 + offset + this.angle, -height/4 + offset +this.angle, 0);
+   translate(-width/4 + this.offset + this.angle, -height/4 + this.offset +this.angle, 0);
    globe = createShape(SPHERE, this.radius);
    shape(globe);
    //this.fall();
     }
   }
+  
+  
+  // overloaded creation which applies a texture to the planetoid
+    void creation(PImage globeTex){
+      fill(127, 127, 127);
+      noStroke();
+      lights();
+      globe = createShape(SPHERE, this.radius);
+      globe.setTexture(globeTex);
+
+     
+     if (!this.dead){
+     //fill(127, 127, 127);
+     //noStroke();
+     //lights();
+     pushMatrix();
+     translate(-width/4 + offset + this.angle, -height/4 + offset +this.angle, 0);
+     //globe = createShape(SPHERE, this.radius);
+     //globe.setTexture(globeTex);
+     shape(globe);
+     popMatrix();
+     //this.fall();
+      }
+    }
+
   
   void fall(){
     
@@ -46,15 +71,16 @@ class Planetoid {
     println(this.angle);
     
     if (this.angle > 150){
-     shrinkPlanet();
+     this.shrinkPlanet();
     }
     
     if (this.angle > 155) {
-      killPlanet();
+      this.killPlanet();
       increaseBlackHoleMass();
       }
     }
   }
+  
   
   void shrinkPlanet(){
     for (int i = 0; i < 1000; i++){
@@ -63,10 +89,14 @@ class Planetoid {
     }
   }
   
+  
+  
   void killPlanet(){
     this.dead=true;
   }
   
+  
+ 
   void increaseBlackHoleMass(){
     superMassive.setMass(this.baseMass);
     
