@@ -42,7 +42,16 @@ class BlackHole {
   
   void setMass(float incrament){
    this.startingMass+=incrament;
-  }  
+  }
+  
+  public float[] getBlackHoleLoc(){
+    float x1 = this.startX;
+    float halfWidth = (this.radius + this.startingMass) /2;
+    float y1 = this.startY;
+    float[] output = {x1, y1, halfWidth};
+    
+    return output;
+  }
   
   
   
