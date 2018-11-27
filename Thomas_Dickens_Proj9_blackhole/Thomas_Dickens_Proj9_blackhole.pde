@@ -1,10 +1,12 @@
 PImage eh;
 PImage earthTex;
 PImage moonTex;
+PImage planTex;
 BlackHole superMassive;
 Planetoid inTheBeginning;
 Earth earthTest;
 FastBody[] fastArray = new FastBody[10];
+ArrayList planets; 
 
 void setup(){
  size(926,741, P3D);
@@ -14,6 +16,9 @@ void setup(){
  eh = loadImage("eventHorizon2.jpg");
  earthTex = loadImage("earth.jpeg");
  moonTex = loadImage("moon.jpeg");
+ planTex = loadImage("planet.png");
+ 
+ planets = new ArrayList();
  
  //obejects
  superMassive = new BlackHole(100, 25);
@@ -27,6 +32,7 @@ void setup(){
    
  }
  
+ inTheBeginning = new Planetoid(60, 30, 30);
 
 
 }
@@ -60,6 +66,14 @@ void draw(){
    earthTest.moon.creation(moonTex);
    earthTest.fall();
    earthTest.moon.fall();
+
+  for (int i = planets.size()-1; i >= 0; i--){
+    Planetoid a = (Planetoid) planets.get(i);
+    a.creation(planTex);
+    a.fall();
+  }
   
-  
+}
+void mouseClicked(){
+  planets.add(new Planetoid(60, 30, 30));
 }
