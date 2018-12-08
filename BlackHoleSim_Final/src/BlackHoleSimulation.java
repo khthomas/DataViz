@@ -94,6 +94,11 @@ public class BlackHoleSimulation extends PApplet{
 		    a.creation(planTex);
 		    a.fall();
 		  }
+		  
+		  if (frameCount % 100 == 0) {
+			  earthTest.tearPlanet();
+			  earthTest.moon.tearPlanet();
+		  }
 	}
 	
 	public void mouseClicked(){

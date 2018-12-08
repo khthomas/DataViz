@@ -8,8 +8,7 @@ public class BlackHole {
 	  float radius;
 	  float startX;
 	  float startY;
-	  PApplet p;
-	  
+	  PApplet p;	  
 	  
 	  // constructors
 	  public BlackHole(){

@@ -30,8 +30,7 @@ public class Earth extends Planetoid{
 	    float moonOffset = this.offset  + this.radius + 10;
 	     
 	    //public Planetoid(float mass, float radius, float offset){
-	    moon = new Planetoid(p, b, moonMass, moonRadius, moonOffset);  
-	    
+	    moon = new Planetoid(p, b, moonMass, moonRadius, moonOffset);	    
 	   
 	  }
 

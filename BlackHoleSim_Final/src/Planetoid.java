@@ -12,6 +12,8 @@ public class Planetoid {
 	  float baseMass;
 	  PApplet p;
 	  BlackHole b;
+	  int numberOfPieces = 0;
+	  Planetoid[] subPlanets;
 	  
 	  // base constructor
 	  public Planetoid(){
@@ -107,4 +109,41 @@ public class Planetoid {
 	    b.setMass(this.baseMass);
 	    
 	  }
+	  
+	  void tearPlanet() {
+		  int current = numberOfPieces;		  
+		  
+		  if (numberOfPieces == 0) {
+			  numberOfPieces += 1;
+		  } else {
+			  numberOfPieces *= 2;
+		  }
+		  
+		  float newMass = (float) (this.mass * 0.9/ (numberOfPieces - current));
+		  this.mass = newMass;
+		  
+		  float newRadius = (float) (this.radius * 0.9); //(numberOfPieces - current);
+		  this.radius = newRadius;
+		  
+		 
+//		 subPlanets = new Planetoid[numberOfPieces - current];
+//		 
+//		 for (int planet = 0; planet < subPlanets.length; planet++) {
+//			 subPlanets[planet] = new Planetoid(p, b, newMass, newRadius, this.offset + p.random(100));
+//		 }
+		  
+		  
+		  
+	  }
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
 }
