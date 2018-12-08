@@ -12,7 +12,7 @@ import java.io.InputStream;
 import java.io.OutputStream; 
 import java.io.IOException;
 
-
+//check out PEasyCam for more interation 
 public class BlackHoleSimulation extends PApplet{
 	
 	PImage eh;
@@ -69,7 +69,7 @@ public class BlackHoleSimulation extends PApplet{
 	}
 	
 	public void draw() {
-		 background(eh);
+		 background(eh); //eh = event horizon
 		 superMassive.collapse();
 
 		    
@@ -95,10 +95,8 @@ public class BlackHoleSimulation extends PApplet{
 		    a.fall();
 		  }
 		  
-		  if (frameCount % 100 == 0) {
-			  earthTest.tearPlanet();
-			  earthTest.moon.tearPlanet();
-		  }
+		  earthTest.tearPlanet(200, 0.5);
+		  
 	}
 	
 	public void mouseClicked(){

@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 import processing.core.*;
 
 public class Planetoid {
@@ -13,7 +15,8 @@ public class Planetoid {
 	  PApplet p;
 	  BlackHole b;
 	  int numberOfPieces = 0;
-	  Planetoid[] subPlanets;
+	  ArrayList subPlanets = new ArrayList();
+	  PImage globeTex;
 	  
 	  // base constructor
 	  public Planetoid(){
@@ -53,6 +56,7 @@ public class Planetoid {
 	      p.fill(127, 127, 127);
 	      p.noStroke();
 	      p.lights();
+	      this.globeTex = globeTex;
 	      globe = p.createShape(p.SPHERE, this.radius);
 	      globe.setTexture(globeTex);
 
@@ -110,31 +114,45 @@ public class Planetoid {
 	    
 	  }
 	  
-	  void tearPlanet() {
-		  int current = numberOfPieces;		  
+	  public void setMass(float mass) {
+		  this.mass = mass;
+	  }
+	  
+	  public void setRadius(float radius) {
+		  this.radius = radius;
+	  }
+	  
+	  void tearPlanet(int frameCountVar, double shrinkFactor) {
 		  
-		  if (numberOfPieces == 0) {
-			  numberOfPieces += 1;
-		  } else {
-			  numberOfPieces *= 2;
-		  }
-		  
-		  float newMass = (float) (this.mass * 0.9/ (numberOfPieces - current));
+		  float newMass;
+		  float newRadius;
+		 
+		  if (p.frameCount % frameCountVar == 0) {
+		  newMass = (float) (this.mass * shrinkFactor);// (numberOfPieces - current));
 		  this.mass = newMass;
 		  
-		  float newRadius = (float) (this.radius * 0.9); //(numberOfPieces - current);
+		  newRadius = (float) (this.radius * shrinkFactor); //(numberOfPieces - current);
 		  this.radius = newRadius;
-		  
 		 
-//		 subPlanets = new Planetoid[numberOfPieces - current];
-//		 
-//		 for (int planet = 0; planet < subPlanets.length; planet++) {
-//			 subPlanets[planet] = new Planetoid(p, b, newMass, newRadius, this.offset + p.random(100));
-//		 }
+//		  public Planetoid(PApplet p, BlackHole b, float mass, float radius, float offset){
+
+		 subPlanets.add(new Planetoid(p,b, newMass, newRadius, 10));
+		 
+		  }  else {
+			  newMass = this.mass;
+			  newRadius = this.radius;
+		  }
 		  
 		  
-		  
-	  }
+		 for (int planet = 0; planet < subPlanets.size(); planet++) {
+			    Planetoid a = (Planetoid) subPlanets.get(planet);
+			    a.creation(this.globeTex);
+			    a.fall();
+			    a.setMass(newMass);
+			    a.setRadius(newRadius);
+			    
+		 }
+	  } //end tear planet
 	  
 	  
 	  
