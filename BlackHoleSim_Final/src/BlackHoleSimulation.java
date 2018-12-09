@@ -122,10 +122,10 @@ public class BlackHoleSimulation extends PApplet{
 		  for (int i = planets.size()-1; i >= 0; i--){
 			  
 		    Earth a = (Earth) planets.get(i);
-//		    a.creation(randomSkin);
+//		    a.creation();
 		    a.show();
 		    a.fall();
-		    a.tearPlanet(200, 0.55);
+//		    a.tearPlanet(200, 0.55);
 		  }
 		  
 		  earthTest.tearPlanet(200, 0.55);
@@ -155,7 +155,6 @@ public class BlackHoleSimulation extends PApplet{
 		  planets.add(new Earth(this, superMassive, 60, 30, 30));
 		  Earth created = (Earth) planets.get(planets.size() -1);
 		  created.creation(randomSkin);
-//		  created.tearPlanet(200, 0.55);
 		  
 		}
 	

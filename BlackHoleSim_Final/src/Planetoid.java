@@ -45,8 +45,8 @@ public class Planetoid {
 	   p.lights();
 	   p.translate(-p.width/4 + this.offset + this.angle, -p.height/4 + this.offset +this.angle, 0);
 	   globe = p.createShape(p.SPHERE, this.radius);
-	   globe.setTexture(globeTex);
-	   p.shape(globe);
+//	   globe.setTexture(globeTex);
+//	   p.shape(globe);
 	   //this.fall();
 	    }
 	  }
