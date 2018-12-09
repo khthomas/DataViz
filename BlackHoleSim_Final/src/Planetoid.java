@@ -60,8 +60,9 @@ public class Planetoid {
 	      this.globeTex = globeTex;
 	      globe = p.createShape(p.SPHERE, this.radius);
 	      globe.setTexture(globeTex);
+	    }
 
-	     
+	   public void show() {
 	     if (!this.dead){
 	     //fill(127, 127, 127);
 	     //noStroke();
@@ -141,7 +142,8 @@ public class Planetoid {
 		  this.mass = newMass;
 		  
 		  newRadius = (float) (this.radius * shrinkFactor); //(numberOfPieces - current);
-		  this.radius = newRadius;
+//		  this.radius = newRadius;
+		  setRadius(newRadius);
 		  
 
 		  
@@ -157,6 +159,7 @@ public class Planetoid {
 		 for (int planet = 0; planet < subPlanets.size(); planet++) {
 			    Planetoid a = (Planetoid) subPlanets.get(planet);
 			    a.creation(this.globeTex);
+			    a.show();
 			    a.fall();
 			    a.setMass(newMass);
 			    a.setRadius(newRadius);
@@ -168,6 +171,48 @@ public class Planetoid {
 		 }
 		 
 		 p.println(this.baseMass);
+		 
+	  } //end tear planet
+	  
+void tearPlanet(int frameCountVar, double shrinkFactor, Planetoid passedPlanet) {
+		  
+		  float newMass;
+		  float newRadius;
+		 
+		  if (p.frameCount % frameCountVar == 0 && passedPlanet.subPlanets.size() < 2) {
+		  newMass = (float) (passedPlanet.baseMass * shrinkFactor);// (numberOfPieces - current));
+		  passedPlanet.mass = newMass;
+		  
+		  newRadius = (float) (this.radius * shrinkFactor); //(numberOfPieces - current);
+		  passedPlanet.radius = newRadius;
+//		  setRadius(newRadius);
+		  
+
+		  
+		 
+//		  public Planetoid(PApplet p, BlackHole b, float mass, float radius, float offset){
+		 subPlanets.add(new Planetoid(p,b, newMass, newRadius, 0));		 
+		  }  else {
+			  newMass = passedPlanet.mass;
+			  newRadius = passedPlanet.radius;
+		  }
+		  
+		  
+		 for (int planet = 0; planet < subPlanets.size(); planet++) {
+			    Planetoid a = (Planetoid) subPlanets.get(planet);
+			    a.creation(passedPlanet.globeTex);
+			    a.show();
+			    a.fall();
+			    a.setMass(newMass);
+			    a.setRadius(newRadius);
+			    a.setBaseMass(passedPlanet.baseMass / subPlanets.size());
+			    // the next line isn't quite what I was looking for, but I like the effect
+			    // its like the closer it gets to the event horizon, the more unstable it becomes.
+			    a.setOffset(passedPlanet.offset + (newRadius*subPlanets.size()) + p.random(25));
+			    
+		 }
+		 
+		 p.println(passedPlanet.baseMass);
 		 
 	  } //end tear planet
 	  
