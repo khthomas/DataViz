@@ -45,6 +45,7 @@ public class Planetoid {
 	   p.lights();
 	   p.translate(-p.width/4 + this.offset + this.angle, -p.height/4 + this.offset +this.angle, 0);
 	   globe = p.createShape(p.SPHERE, this.radius);
+	   globe.setTexture(globeTex);
 	   p.shape(globe);
 	   //this.fall();
 	    }
@@ -86,7 +87,7 @@ public class Planetoid {
 	     this.shrinkPlanet();
 	    }
 	    
-	    if (this.angle > 155) {
+	    if (this.angle > 155) { //this.angle > 155
 	      this.killPlanet();
 	      increaseBlackHoleMass();
 	      }
@@ -122,22 +123,31 @@ public class Planetoid {
 		  this.radius = radius;
 	  }
 	  
+	  public void setOffset(float offset) {
+		  this.offset = offset;
+	  }
+	  
+	  public void setBaseMass(float baseMass) {
+		  this.baseMass = baseMass;
+	  }
+	  
 	  void tearPlanet(int frameCountVar, double shrinkFactor) {
 		  
 		  float newMass;
 		  float newRadius;
 		 
-		  if (p.frameCount % frameCountVar == 0) {
-		  newMass = (float) (this.mass * shrinkFactor);// (numberOfPieces - current));
+		  if (p.frameCount % frameCountVar == 0 && subPlanets.size() < 2) {
+		  newMass = (float) (this.baseMass * shrinkFactor);// (numberOfPieces - current));
 		  this.mass = newMass;
 		  
 		  newRadius = (float) (this.radius * shrinkFactor); //(numberOfPieces - current);
 		  this.radius = newRadius;
+		  
+
+		  
 		 
 //		  public Planetoid(PApplet p, BlackHole b, float mass, float radius, float offset){
-
-		 subPlanets.add(new Planetoid(p,b, newMass, newRadius, 10));
-		 
+		 subPlanets.add(new Planetoid(p,b, newMass, newRadius, 0));		 
 		  }  else {
 			  newMass = this.mass;
 			  newRadius = this.radius;
@@ -150,8 +160,15 @@ public class Planetoid {
 			    a.fall();
 			    a.setMass(newMass);
 			    a.setRadius(newRadius);
+			    a.setBaseMass(this.baseMass / subPlanets.size());
+			    // the next line isn't quite what I was looking for, but I like the effect
+			    // its like the closer it gets to the event horizon, the more unstable it becomes.
+			    a.setOffset(this.offset + (newRadius*subPlanets.size()) + p.random(25));
 			    
 		 }
+		 
+		 p.println(this.baseMass);
+		 
 	  } //end tear planet
 	  
 	  

@@ -95,7 +95,8 @@ public class BlackHoleSimulation extends PApplet{
 		    a.fall();
 		  }
 		  
-		  earthTest.tearPlanet(200, 0.5);
+		  earthTest.tearPlanet(200, 0.55);
+		  earthTest.moon.tearPlanet(200, 0.55);
 		  
 	}
 	
