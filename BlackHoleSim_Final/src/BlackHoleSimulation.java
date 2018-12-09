@@ -75,7 +75,8 @@ public class BlackHoleSimulation extends PApplet{
 		    
 		 for (int i = 0; i < fastArray.length; i++){
 		   fastArray[i].genShape();
-		   fastArray[i].pastEventHorizon();   
+		   fastArray[i].pastEventHorizon();
+		   fastArray[i].killFastBody();
 		}
 
 		 
