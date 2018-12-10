@@ -31,7 +31,8 @@ public class BlackHoleSimulation extends PApplet{
 	Earth earthTest;
 	FastBody[] fastArray = new FastBody[10];
 	ArrayList planets;
-
+	ArrayList fastObject;
+	
 	public static void main(String[] passedArgs) {
 //		PApplet.main("BlackHoleSimulation");
 		String[] appletArgs = new String[] { "BlackHoleSimulation" };
@@ -78,6 +79,7 @@ public class BlackHoleSimulation extends PApplet{
 //		 }
 		 
 		 planets = new ArrayList();
+		 fastObject = new ArrayList();
 		 
 		 //obejects
 		 superMassive = new BlackHole(this, 100, 25);
@@ -128,6 +130,11 @@ public class BlackHoleSimulation extends PApplet{
 //		    a.tearPlanet(200, 0.55);
 		  }
 		  
+		  for(int i= fastObject.size()-1; i>=0; i--){
+			    FastBody b = (FastBody) fastObject.get(i);
+			    b.genShape();
+		  }
+		  
 		  earthTest.tearPlanet(200, 0.55);
 		  earthTest.moon.tearPlanet(200, 0.55);
 		  
@@ -158,7 +165,9 @@ public class BlackHoleSimulation extends PApplet{
 		  
 		}
 	
-
+	public void mouseDragged(){
+		  fastObject.add(new FastBody(this, superMassive, random(15), mouseX-mouseY, random(5)));
+		}
 	
 
 
