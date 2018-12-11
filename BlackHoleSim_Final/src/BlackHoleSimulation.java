@@ -166,7 +166,7 @@ public class BlackHoleSimulation extends PApplet{
 		}
 	
 	public void mouseDragged(){
-		  fastObject.add(new FastBody(this, superMassive, random(15), mouseX-mouseY, random(5)));
+		  fastObject.add(new FastBody(this, superMassive, random(15), (mouseX-mouseY)/200, random(5)));
 		}
 	
 

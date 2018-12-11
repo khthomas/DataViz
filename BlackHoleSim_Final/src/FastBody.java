@@ -40,7 +40,7 @@ public class FastBody {
 	    this.holdingSpeed = this.speed;
 	    this.p = p;
 	    this.b = b;
-		this.bodyColor = p.color(255/2, p.random(255), 255/2, 255);
+		this.bodyColor = p.color(169, 169, 169, 255);
 	  this.randomX = p.random(p.width/4);
 	  this.randomY = p.random(p.height);
 	  this.blackHoleVars = b.getBlackHoleLoc();	  float leftXBound; // = blackHoleVars[0] - blackHoleVars[2];
